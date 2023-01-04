@@ -46,7 +46,7 @@
         const [hexRowLineIndexOpen, setHexRowLineIndexOpen] = React.useState();
         console.log(hexRowLineIndexOpen);
         return html`
-          <div class="grove">
+          <div class="grove_container">
             <dialog class="grove_hex-dialog" open=${!!hexRowLineIndexOpen}>
               <button
                 onClick=${() => {
@@ -56,21 +56,23 @@
                 Close
               </button>
             </dialog>
-            ${groveData.map((row, rowIndex) => {
-              return html`
-                <div class="grove_hex">
-                  ${row.map((line, lineIndex) => {
-                    return html`<div
-                      onClick=${() => {
-                        setHexRowLineIndexOpen([rowIndex, lineIndex]);
-                      }}
-                    >
-                      lol
-                    </div> `;
-                  })}
-                </div>
-              `;
-            })}
+            <div class="grove_content">
+              ${groveData.map((row, rowIndex) => {
+                return html`
+                  <div class="grove_hex">
+                    ${row.map((line, lineIndex) => {
+                      return html`<div
+                        onClick=${() => {
+                          setHexRowLineIndexOpen([rowIndex, lineIndex]);
+                        }}
+                      >
+                        lol
+                      </div> `;
+                    })}
+                  </div>
+                `;
+              })}
+            </div>
           </div>
         `;
       }

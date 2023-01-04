@@ -8,6 +8,74 @@
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/main.js"></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.production.min.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    ></script>
+    <script type="module">
+      import './style.css';
+      import htm from 'https://unpkg.com/htm?module';
+      const html = htm.bind(React.createElement);
+      const groveData = [
+        [{ name: '1' }, { name: '1' }, { name: '1' }],
+        [{ name: '1' }, { name: '1' }, { name: '1' }, { name: '1' }],
+        [
+          { name: '1' },
+          { name: '1' },
+          { name: '1' },
+          { name: '1' },
+          { name: '1' },
+        ],
+        [{ name: '1' }, { name: '1' }, { name: '1' }, { name: '1' }],
+        [{ name: '1' }, { name: '1' }, { name: '1' }],
+      ];
+
+      function App(props) {
+        return html`
+          <h1>Mega Grove</h1>
+
+          <${Grove} />
+        `;
+      }
+
+      function Grove(props) {
+        const [hexRowLineIndexOpen, setHexRowLineIndexOpen] = React.useState();
+        console.log(hexRowLineIndexOpen);
+        return html`
+          <div class="grove">
+            <dialog class="grove_hex-dialog" open=${!!hexRowLineIndexOpen}>
+              <button
+                onClick=${() => {
+                  setHexRowLineIndexOpen(undefined);
+                }}
+              >
+                Close
+              </button>
+            </dialog>
+            ${groveData.map((row, rowIndex) => {
+              return html`
+                <div class="grove_hex">
+                  ${row.map((line, lineIndex) => {
+                    return html`<div
+                      onClick=${() => {
+                        setHexRowLineIndexOpen([rowIndex, lineIndex]);
+                      }}
+                    >
+                      lol
+                    </div> `;
+                  })}
+                </div>
+              `;
+            })}
+          </div>
+        `;
+      }
+
+      ReactDOM.render(html`<${App} />`, document.querySelector('#root'));
+    </script>
   </body>
 </html>

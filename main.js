@@ -25,3 +25,5 @@ function Grove(props) {
 }
 
 render(html`<${App} name="World" />`, document.querySelector('#root'));
+
+function grovedata
